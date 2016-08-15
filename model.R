@@ -65,3 +65,22 @@ AUC <- function (actual, predicted) {
     auc <- (sum(r[actual == 1]) - n_pos * (n_pos + 1)/2)/n_pos/n_neg
     auc
 }
+
+calculateOrders <- function(datatable){
+    actual.orders = (datatable$tp)/((datatable$F1 * datatable$precision)/(200 * datatable$precision - datatable$F1))
+    return(actual.orders)
+}
+
+round2 = function(x, n) {
+    posneg = sign(x)
+    z = abs(x)*10^n
+    z = z + 0.5
+    z = trunc(z)
+    z = z/10^n
+    z*posneg
+}
+
+calculateF1 <- function(TP, n){
+    F1 = (2*TP/n*TP/517)/(TP/n+TP/517)
+    return(F1)
+}
